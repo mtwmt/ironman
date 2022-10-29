@@ -1,3 +1,4 @@
 :host {
-  @apply h-full w-full flex justify-center items-center flex-col px-[4vw];
+  @apply block w-full px-[4vw] my-12 md:my-0
+  md:h-full  md:flex md:justify-center md:items-center md:flex-col;
 }
