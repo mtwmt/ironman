@@ -100,6 +100,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/ironman/",
+            "name": "Mandy",
+            "email": "mtwmt@hotmail.com"
+          }
         }
       }
     }
