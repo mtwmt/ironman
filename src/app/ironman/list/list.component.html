@@ -1,0 +1,42 @@
+<div class="relative min-w">
+  <header class="min-h-[60px]">
+    <nav>
+      <ul class="text-sm p-4 text-neutral-700">
+        <li><a routerLink="">關於本站</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="h-full w-full px-[4vw]">
+    鐵人賽歷屆主題搜尋
+    <app-search></app-search>
+    <div>
+      <ng-container *ngIf="ironmanStoreService.getIronmanList$ | async as list">
+        <p class="text-right">共 {{ list.length }} 筆</p>
+        <ul *ngFor="let item of list">
+          <li class="leading-loose mb-2 align-top">
+            <span class="inline-block align-top">{{ item.year }}</span>
+            <span
+              class="relative top-1 inline-block align-top mx-2 w-24 rounded bg-neutral-200 text-center text-xs leading-loose"
+              >{{ item.category }}</span
+            >
+            <a
+              class="inline-block align-top hover:text-blue-500 mr-2"
+              [href]="item.topicUrl"
+              target="_blank"
+            >
+              {{ item.topic }}
+            </a>
+            <span class="inline-block align-top text-neutral-400">{{ item.author }}</span>
+          </li>
+        </ul>
+      </ng-container>
+    </div>
+  </div>
+  <footer class="relative bg-white">
+    <div>
+      <p class="p-4 text-right text-xs">
+        Copyright © 2022 Mandy. All rights reserved. Build with Angular
+      </p>
+    </div>
+  </footer>
+</div>

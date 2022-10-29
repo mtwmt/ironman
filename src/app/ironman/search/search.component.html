@@ -1,0 +1,24 @@
+<select
+  *ngIf="selectYear"
+  name=""
+  id=""
+  (change)="onYearChange($event)"
+  class="flex bg-transparent m-0 break-words mr-4 w-24 border-none placeholder:text-neutral-400 focus:outline-none"
+>
+  <option *ngFor="let y of years" [ngValue]="y" [selected]="y === year">
+    {{ y }}
+  </option>
+</select>
+<input
+  type="text"
+  placeholder="搜尋文章標題"
+  [(ngModel)]="keyword"
+  (keyup.enter)="onSearch($any($event).target.value)"
+  class="flex bg-transparent m-0 break-words mr-4 w-full border-none placeholder:text-neutral-400 focus:outline-none"
+/>
+<fa-icon
+  [icon]="['fas', 'magnifying-glass']"
+  class="cursor-pointer flex items-center text-neutral-300"
+  (click)="onSearch(keyword)"
+>
+</fa-icon>
