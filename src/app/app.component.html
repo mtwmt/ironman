@@ -1,3 +1,21 @@
 <div class="relative mx-auto h-full w-full container">
-  <router-outlet></router-outlet>
+  <div class="relative flex flex-col h-full">
+    <header class="min-h-[60px]">
+      <nav>
+        <ul class="text-sm p-4 text-neutral-700">
+          <li><a routerLink="">關於本站</a></li>
+        </ul>
+      </nav>
+    </header>
+    <router-outlet></router-outlet>
+    <footer class="relative bg-white">
+      <div>
+        <p class="p-4 text-right text-xs">
+          Copyright © 2022
+          <a href="https://mtwmt.com/" target="_blank">Mandy</a>. All rights
+          reserved. Build with Angular
+        </p>
+      </div>
+    </footer>
+  </div>
 </div>
