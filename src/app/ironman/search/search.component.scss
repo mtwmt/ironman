@@ -1,3 +1,6 @@
 :host {
-  @apply px-4 max-w-xl w-full flex h-11 my-3 rounded-3xl bg-white border border-neutral-300;
+  @apply
+  px-4 max-w-xl w-full flex h-11 my-3 rounded-3xl bg-white border border-neutral-300
+  dark:bg-neutral-700 dark:border-neutral-900
+  ;
 }

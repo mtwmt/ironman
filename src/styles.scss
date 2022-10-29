@@ -6,6 +6,9 @@
 html,
 body {
   @apply relative w-full h-full;
+  &.dark {
+    @apply bg-neutral-800 text-white;
+  }
 }
 
 a {
