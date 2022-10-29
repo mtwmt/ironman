@@ -1,14 +1,14 @@
 <select
-  *ngIf="selectYear"
+  *ngIf="isSelectYear"
   name=""
   id=""
-  (change)="onYearChange($event)"
-  class="flex bg-transparent m-0 break-words mr-4 w-24 border-none placeholder:text-neutral-400 focus:outline-none"
->
+  [formControl]="selectYear"
+  (ngModelChange)="onYearChange($event)"
+  class="flex bg-transparent m-0 break-words mr-4 w-36 border-none placeholder:text-neutral-400 focus:outline-none"
+  >
   <option
     *ngFor="let y of years"
-    [ngValue]="y"
-    [selected]="y.value === year"
+    [value]="y.value"
     class="dark:bg-neutral-800 dark:text-white"
   >
     {{ y.label }}

@@ -1,15 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, map, tap, combineLatest } from 'rxjs';
 import { IronmanStoreService } from '../ironman-store.service';
 
+interface option {
+  label: string;
+  value: string;
+}
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  @Input() selectYear: boolean = true;
+  @Input() isSelectYear: boolean = true;
+
+  selectYear = new FormControl();
 
   years = [
     {
@@ -17,43 +24,43 @@ export class SearchComponent implements OnInit {
       value: '',
     },
     {
-      label: '2022',
+      label: '第13屆(2022)',
       value: '2022',
     },
     {
-      label: '2021',
+      label: '第12屆(2021)',
       value: '2021',
     },
     {
-      label: '2020',
+      label: '第11屆(2020)',
       value: '2020',
     },
     {
-      label: '2019',
+      label: '第10屆(2019)',
       value: '2019',
     },
     {
-      label: '2018',
+      label: '第9屆(2018)',
       value: '2018',
     },
     {
-      label: '2017',
+      label: '第8屆(2017)',
       value: '2017',
     },
+    // {
+    //   label: '2016',
+    //   value: '2016',
+    // },
+    // {
+    //   label: '2015',
+    //   value: '2015',
+    // },
     {
-      label: '2016',
-      value: '2016',
-    },
-    {
-      label: '2015',
-      value: '2015',
-    },
-    {
-      label: '2014',
+      label: '第7屆(2014)',
       value: '2014',
     },
     {
-      label: '2014前',
+      label: '第7屆(2014)前',
       value: 'history',
     },
   ];
@@ -74,24 +81,22 @@ export class SearchComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public ironmanStoreService: IronmanStoreService
   ) {
-    combineLatest([this.year$, this.key$]).subscribe(
-      ([year, key]) => {
-        this.keyword = key;
-        this.year = year;
-      }
-    );
+    combineLatest([this.year$, this.key$]).subscribe(([year, key]) => {
+      this.keyword = key;
+      this.selectYear.setValue(year);
+      this.year = year;
+    });
   }
 
   ngOnInit(): void {}
 
   onYearChange(year: any) {
-    const y = year.target.value;
-    this.year = y === 'All' ? '' : y;
-    this.router.navigate(['list', this.year], {
+
+    this.router.navigate(['list', year], {
       queryParams: {
         key: encodeURI(this.keyword),
-        category: this.category,
       },
+      queryParamsHandling: 'merge',
     });
   }
 
@@ -112,5 +117,9 @@ export class SearchComponent implements OnInit {
       },
       queryParamsHandling: 'merge',
     });
+  }
+
+  compareFn(a: option, b: option): boolean {
+    return a && b ? a.value === b.value : a === b;
   }
 }

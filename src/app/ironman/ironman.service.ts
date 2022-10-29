@@ -21,15 +21,15 @@ export class IronmanService {
     return this.httpClient.get<IronmanListInfo[]>(url);
   }
 
-  fetch2015Ironman() {
-    const url = `${this.baseUrl}/ironman2015.json`;
-    return this.httpClient.get<IronmanListInfo[]>(url);
-  }
+  // fetch2015Ironman() {
+  //   const url = `${this.baseUrl}/ironman2015.json`;
+  //   return this.httpClient.get<IronmanListInfo[]>(url);
+  // }
 
-  fetch2016Ironman() {
-    const url = `${this.baseUrl}/ironman2016.json`;
-    return this.httpClient.get<IronmanListInfo[]>(url);
-  }
+  // fetch2016Ironman() {
+  //   const url = `${this.baseUrl}/ironman2016.json`;
+  //   return this.httpClient.get<IronmanListInfo[]>(url);
+  // }
   fetch2017Ironman() {
     const url = `${this.baseUrl}/ironman2017.json`;
     return this.httpClient.get<IronmanListInfo[]>(url);

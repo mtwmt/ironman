@@ -34,12 +34,12 @@ export class IronmanStoreService {
   public ironman2017$: Observable<IronmanListInfo[]> = this.ironmanService
     .fetch2017Ironman()
     .pipe(shareReplay(1));
-  public ironman2016$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetch2016Ironman()
-    .pipe(shareReplay(1));
-  public ironman2015$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetch2015Ironman()
-    .pipe(shareReplay(1));
+  // public ironman2016$: Observable<IronmanListInfo[]> = this.ironmanService
+  //   .fetch2016Ironman()
+  //   .pipe(shareReplay(1));
+  // public ironman2015$: Observable<IronmanListInfo[]> = this.ironmanService
+  //   .fetch2015Ironman()
+  //   .pipe(shareReplay(1));
   public ironman2014$: Observable<IronmanListInfo[]> = this.ironmanService
     .fetch2014Ironman()
     .pipe(shareReplay(1));
@@ -60,8 +60,8 @@ export class IronmanStoreService {
       this.ironman2019$,
       this.ironman2018$,
       this.ironman2017$,
-      this.ironman2016$,
-      this.ironman2015$,
+      // this.ironman2016$,
+      // this.ironman2015$,
       this.ironman2014$,
       this.ironmanHistory$,
     ]).pipe(
@@ -73,8 +73,8 @@ export class IronmanStoreService {
           i2019,
           i2018,
           i2017,
-          i2016,
-          i2015,
+          // i2016,
+          // i2015,
           i2014,
           iHistory,
         ]) => {
@@ -98,12 +98,12 @@ export class IronmanStoreService {
             case '2017':
               list = i2017;
               break;
-            case '2016':
-              list = i2016;
-              break;
-            case '2015':
-              list = i2015;
-              break;
+            // case '2016':
+            //   list = i2016;
+            //   break;
+            // case '2015':
+            //   list = i2015;
+            //   break;
             case '2014':
               list = i2014;
               break;
@@ -118,8 +118,8 @@ export class IronmanStoreService {
                 ...i2019,
                 ...i2018,
                 ...i2017,
-                ...i2016,
-                ...i2015,
+                // ...i2016,
+                // ...i2015,
                 ...i2014,
                 ...iHistory,
               ];
