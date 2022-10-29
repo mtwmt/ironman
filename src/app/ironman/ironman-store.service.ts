@@ -131,7 +131,9 @@ export class IronmanStoreService {
                     break;
                 }
                 return list.filter((d: IronmanListInfo) => {
-                  return d.topic.toLocaleLowerCase().includes(val);
+                  return d.topic
+                    .toLocaleLowerCase()
+                    .includes(val.toLocaleLowerCase());
                 });
               }
             )
