@@ -8,15 +8,12 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'ironman';
-
   constructor(
     private renderer: Renderer2,
     public appService: AppService,
     @Inject(DOCUMENT) private document: Document
   ) {
     this.initTheme();
-    console.log(this.document);
   }
 
   initTheme(): void {
@@ -25,6 +22,7 @@ export class AppComponent {
   }
 
   onThemeChange(theme: string = ''): void {
+    this.appService.theme$.next(theme);
     if (!theme) {
       this.renderer.removeClass(this.document.body, 'dark');
       localStorage.removeItem('theme');

@@ -5,6 +5,7 @@ import { ReplaySubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AppService {
+  theme$ = new ReplaySubject<string>(1);
 
   constructor() {}
 }

@@ -29,9 +29,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     combineLatest([this.year$, this.key$])
-      .pipe(
-        takeUntil(this.onDestroy$),
-      )
+      .pipe(takeUntil(this.onDestroy$))
       .subscribe(([year, key]) => {
         this.ironmanStoreService.filterQuery(key, year);
       });
