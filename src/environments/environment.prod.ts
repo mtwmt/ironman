@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: '/',
+  baseUrl: 'https://mtwmt.com/ironman',
   assetsUrl: 'assets',
   google: {
     GA_TRACKING_ID: 'UA-149155162-1',
