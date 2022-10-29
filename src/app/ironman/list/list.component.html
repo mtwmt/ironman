@@ -1,15 +1,29 @@
 <div class="">
   IT 鐵人賽歷屆主題搜尋
   <app-search></app-search>
+  <div *ngIf="!!(category$ | async)" class="mt-8">
+    主題：
+    <div class="inline-block leading-relaxed px-2 rounded bg-sky-500 text-white">
+      <span class="inline-block mr-2">{{ category$ | async }}</span>
+      <span (click)="removeCate()" class="cursor-pointer ">
+        <fa-icon [icon]="['fas', 'xmark']" size="1x"> </fa-icon>
+      </span>
+    </div>
+  </div>
   <div>
     <ng-container *ngIf="ironmanStoreService.getIronmanList$ | async as list">
       <p class="text-right">共 {{ list.length }} 筆</p>
       <ul *ngFor="let item of list">
         <li class="leading-loose mb-2 align-top">
           <span class="inline-block align-top">{{ item.year }}</span>
-          <span
-            class="relative top-1 inline-block align-top mx-2 w-24 rounded bg-neutral-200 text-center text-xs leading-loose dark:bg-neutral-500"
-            >{{ item.category }}</span
+          <a
+            [routerLink]="['../', item.year]"
+            [queryParams]="{
+              category: item.category,
+              key: key$ | async
+            }"
+            class=" relative top-1 align-top mx-2 w-24 rounded bg-neutral-200 text-center text-xs leading-loose dark:bg-neutral-700 hover:bg-opacity-70 dark:hover:bg-opacity-70"
+            >{{ item.category }}</a
           >
           <a
             class="inline-block align-top hover:text-blue-500 mr-2"

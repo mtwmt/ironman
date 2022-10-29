@@ -47,7 +47,6 @@ export class IronmanStoreService {
     .fetchHistoryIronman()
     .pipe(shareReplay(1));
 
-
   public getIronmanList$: BehaviorSubject<IronmanListInfo[]> =
     new BehaviorSubject([] as IronmanListInfo[]);
 
@@ -132,12 +131,24 @@ export class IronmanStoreService {
     );
   }
 
-  filterQuery(query: string, year: string = '') {
+  filterCategory(year: string = '', category: string = '') {
+    return this.filterYearObservable(year).pipe(
+      map((list) => {
+        return list.filter((d: IronmanListInfo) => {
+          return d.category
+            .toLocaleLowerCase()
+            .includes(category.toLocaleLowerCase());
+        });
+      })
+    );
+  }
+
+  filterQuery(query: string, year: string = '', category: string = '') {
     of(query)
       .pipe(
         debounceTime(700),
         switchMap((val) => {
-          return this.filterYearObservable(year).pipe(
+          return this.filterCategory(year, category).pipe(
             map((list) => {
               return list.filter((d: IronmanListInfo) => {
                 return d.topic
@@ -152,6 +163,4 @@ export class IronmanStoreService {
         this.getIronmanList$.next(res);
       });
   }
-
-
 }

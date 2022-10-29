@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map, tap, combineLatest } from 'rxjs';
 import { IronmanStoreService } from '../ironman-store.service';
 
 @Component({
@@ -59,6 +59,7 @@ export class SearchComponent implements OnInit {
   ];
   keyword: string = '';
   year: string = '';
+  category: string = '';
 
   year$: Observable<string> = this.activatedRoute.params.pipe(
     map((params: Params) => params['year'] ?? '')
@@ -68,16 +69,23 @@ export class SearchComponent implements OnInit {
     map((params: Params) => (!!params['key'] ? decodeURI(params['key']) : ''))
   );
 
+  category$: Observable<string> = this.activatedRoute.queryParams.pipe(
+    map((params: Params) => (!!params['category'] ? params['category'] : ''))
+  );
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public ironmanStoreService: IronmanStoreService
   ) {
-    this.key$.subscribe((key) => {
-      this.keyword = key;
-    });
 
-    this.year$.subscribe((y) => (this.year = y));
+    combineLatest([this.year$, this.category$, this.key$]).subscribe(
+      ([year, category, key]) => {
+        this.keyword = key;
+        this.year = year;
+        this.category = category;
+      }
+    );
   }
 
   ngOnInit(): void {}
@@ -89,6 +97,7 @@ export class SearchComponent implements OnInit {
     this.router.navigate(['list', this.year], {
       queryParams: {
         key: encodeURI(this.keyword),
+        category: this.category,
       },
     });
   }
@@ -98,6 +107,7 @@ export class SearchComponent implements OnInit {
     this.router.navigate(['list', this.year], {
       queryParams: {
         key: encodeURI(value),
+        category: this.category,
       },
     });
   }
