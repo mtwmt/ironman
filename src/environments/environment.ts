@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  url: 'https://mtwmt.com/ironman',
   baseUrl: 'http://localhost:4200',
   assetsUrl: 'assets',
   google: {
