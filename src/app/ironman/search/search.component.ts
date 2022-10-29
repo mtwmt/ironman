@@ -69,21 +69,15 @@ export class SearchComponent implements OnInit {
     map((params: Params) => (!!params['key'] ? decodeURI(params['key']) : ''))
   );
 
-  category$: Observable<string> = this.activatedRoute.queryParams.pipe(
-    map((params: Params) => (!!params['category'] ? params['category'] : ''))
-  );
-
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public ironmanStoreService: IronmanStoreService
   ) {
-
-    combineLatest([this.year$, this.category$, this.key$]).subscribe(
-      ([year, category, key]) => {
+    combineLatest([this.year$, this.key$]).subscribe(
+      ([year, key]) => {
         this.keyword = key;
         this.year = year;
-        this.category = category;
       }
     );
   }
@@ -93,7 +87,6 @@ export class SearchComponent implements OnInit {
   onYearChange(year: any) {
     const y = year.target.value;
     this.year = y === 'All' ? '' : y;
-
     this.router.navigate(['list', this.year], {
       queryParams: {
         key: encodeURI(this.keyword),
@@ -107,8 +100,17 @@ export class SearchComponent implements OnInit {
     this.router.navigate(['list', this.year], {
       queryParams: {
         key: encodeURI(value),
-        category: this.category,
       },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  onClear(): void {
+    this.router.navigate(['list', this.year], {
+      queryParams: {
+        key: null,
+      },
+      queryParamsHandling: 'merge',
     });
   }
 }

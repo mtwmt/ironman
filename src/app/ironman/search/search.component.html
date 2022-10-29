@@ -5,8 +5,11 @@
   (change)="onYearChange($event)"
   class="flex bg-transparent m-0 break-words mr-4 w-24 border-none placeholder:text-neutral-400 focus:outline-none"
 >
-  <option *ngFor="let y of years" [ngValue]="y" [selected]="y.value === year"
-  class="dark:bg-neutral-800 dark:text-white"
+  <option
+    *ngFor="let y of years"
+    [ngValue]="y"
+    [selected]="y.value === year"
+    class="dark:bg-neutral-800 dark:text-white"
   >
     {{ y.label }}
   </option>
@@ -19,8 +22,14 @@
   class="flex bg-transparent m-0 break-words mr-4 w-full border-none placeholder:text-neutral-400 focus:outline-none"
 />
 <fa-icon
-  [icon]="['fas', 'magnifying-glass']"
+  [icon]="['fas', 'xmark']"
   class="cursor-pointer flex items-center text-neutral-300"
+  (click)="onClear()"
+>
+</fa-icon>
+<fa-icon
+  [icon]="['fas', 'magnifying-glass']"
+  class="ml-2 cursor-pointer flex items-center text-neutral-300"
   (click)="onSearch(keyword)"
 >
 </fa-icon>
