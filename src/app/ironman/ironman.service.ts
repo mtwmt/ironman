@@ -16,42 +16,36 @@ export class IronmanService {
     return this.httpClient.get<IronmanListInfo[]>(url);
   }
 
-  fetch2014Ironman() {
-    const url = `${this.baseUrl}/ironman2014.json`;
+  fetch7thIronman() {
+    const url = `${this.baseUrl}/ironman7th.json`;
     return this.httpClient.get<IronmanListInfo[]>(url);
   }
-
-  // fetch2015Ironman() {
-  //   const url = `${this.baseUrl}/ironman2015.json`;
-  //   return this.httpClient.get<IronmanListInfo[]>(url);
-  // }
-
-  // fetch2016Ironman() {
-  //   const url = `${this.baseUrl}/ironman2016.json`;
-  //   return this.httpClient.get<IronmanListInfo[]>(url);
-  // }
-  fetch2017Ironman() {
-    const url = `${this.baseUrl}/ironman2017.json`;
+  fetch8thIronman() {
+    const url = `${this.baseUrl}/ironman8th.json`;
     return this.httpClient.get<IronmanListInfo[]>(url);
   }
-  fetch2018Ironman() {
-    const url = `${this.baseUrl}/ironman2018.json`;
+  fetch9thIronman() {
+    const url = `${this.baseUrl}/ironman9th.json`;
     return this.httpClient.get<IronmanListInfo[]>(url);
   }
-  fetch2019Ironman() {
-    const url = `${this.baseUrl}/ironman2019.json`;
+  fetch10thIronman() {
+    const url = `${this.baseUrl}/ironman10th.json`;
     return this.httpClient.get<IronmanListInfo[]>(url);
   }
-  fetch2020Ironman() {
-    const url = `${this.baseUrl}/ironman2020.json`;
+  fetch11thIronman() {
+    const url = `${this.baseUrl}/ironman11th.json`;
     return this.httpClient.get<IronmanListInfo[]>(url);
   }
-  fetch2021Ironman() {
-    const url = `${this.baseUrl}/ironman2021.json`;
+  fetch12thIronman() {
+    const url = `${this.baseUrl}/ironman12th.json`;
     return this.httpClient.get<IronmanListInfo[]>(url);
   }
-  fetch2022Ironman() {
-    const url = `${this.baseUrl}/ironman2022.json`;
+  fetch13thIronman() {
+    const url = `${this.baseUrl}/ironman13th.json`;
+    return this.httpClient.get<IronmanListInfo[]>(url);
+  }
+  fetch14thIronman() {
+    const url = `${this.baseUrl}/ironman14th.json`;
     return this.httpClient.get<IronmanListInfo[]>(url);
   }
 }

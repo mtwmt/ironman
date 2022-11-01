@@ -1,3 +1,4 @@
+import { NthKey, NthLabel } from './ironman.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ironman.component.scss'],
 })
 export class IronmanComponent implements OnInit {
+  nthLabel = NthLabel;
+  nthKey = NthKey;
 
   constructor() {}
 
   ngOnInit(): void {}
-
 }

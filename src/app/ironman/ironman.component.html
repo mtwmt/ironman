@@ -1,62 +1,29 @@
 <ng-container>
   <h1 class="text-3xl leading-loose">IT 鐵人賽歷屆主題搜尋</h1>
-  <app-search [isSelectYear]="false"></app-search>
+  <app-search [isSelectNth]="false"></app-search>
   <nav>
     <ul class="">
       <li
         class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
       >
-        <a class="px-3 py-1" [routerLink]="'list'">ALL</a>
+        <a class="px-3 py-1" [routerLink]="'list'">{{ nthLabel.All }}</a>
       </li>
       <li
+        *ngFor="let num of ['14', '13', '12', '11', '10', '9', '8', '7']"
         class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
       >
-        <a class="px-3 py-1" [routerLink]="'list/2022'">第13屆(2022)</a>
-      </li>
-      <li
-        class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
-      >
-        <a class="px-3 py-1" [routerLink]="'list/2021'">第12屆(2021)</a>
-      </li>
-      <li
-        class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
-      >
-        <a class="px-3 py-1" [routerLink]="'list/2020'">第11屆(2020)</a>
-      </li>
-      <li
-        class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
-      >
-        <a class="px-3 py-1" [routerLink]="'list/2019'">第10屆(2019)</a>
-      </li>
-      <li
-        class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
-      >
-        <a class="px-3 py-1" [routerLink]="'list/2018'">第9屆(2018)</a>
-      </li>
-      <li
-        class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
-      >
-        <a class="px-3 py-1" [routerLink]="'list/2017'">第8屆(2017)</a>
-      </li>
-      <!-- <li
-          class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
+        <a
+          class="px-3 py-1"
+          [routerLink]="'list/' + $any(nthKey)['Th' + num]"
+          >{{ $any(nthLabel)["Th" + num] }}</a
         >
-          <a class="px-3 py-1" [routerLink]="'list/2016'">2016</a>
-        </li>
-        <li
-          class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
-        >
-          <a class="px-3 py-1" [routerLink]="'list/2015'">2015</a>
-        </li> -->
-      <li
-        class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
-      >
-        <a class="px-3 py-1" [routerLink]="'list/2014'">第7屆 (2014)</a>
       </li>
       <li
         class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
       >
-        <a class="px-3 py-1" [routerLink]="'list/history'">第7屆 (2014) 以前</a>
+        <a class="px-3 py-1" [routerLink]="'list/history'">{{
+          nthLabel.History
+        }}</a>
       </li>
     </ul>
   </nav>

@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, map, tap, combineLatest } from 'rxjs';
 import { IronmanStoreService } from '../ironman-store.service';
+import { NthKey, NthLabel } from '../ironman.model';
 
 interface option {
   label: string;
@@ -14,62 +15,58 @@ interface option {
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  @Input() isSelectYear: boolean = true;
+  @Input() isSelectNth: boolean = true;
 
-  selectYear = new FormControl();
+  selectNth = new FormControl();
 
-  years = [
+  nth = [
     {
-      label: 'All',
-      value: '',
+      label: NthLabel.All,
+      value: NthKey.All,
     },
     {
-      label: '第13屆(2022)',
-      value: '2022',
+      label: NthLabel.Th14,
+      value: NthKey.Th14,
     },
     {
-      label: '第12屆(2021)',
-      value: '2021',
+      label: NthLabel.Th13,
+      value: NthKey.Th13,
     },
     {
-      label: '第11屆(2020)',
-      value: '2020',
+      label: NthLabel.Th12,
+      value: NthKey.Th12,
     },
     {
-      label: '第10屆(2019)',
-      value: '2019',
+      label: NthLabel.Th11,
+      value: NthKey.Th11,
     },
     {
-      label: '第9屆(2018)',
-      value: '2018',
+      label: NthLabel.Th10,
+      value: NthKey.Th10,
     },
     {
-      label: '第8屆(2017)',
-      value: '2017',
-    },
-    // {
-    //   label: '2016',
-    //   value: '2016',
-    // },
-    // {
-    //   label: '2015',
-    //   value: '2015',
-    // },
-    {
-      label: '第7屆(2014)',
-      value: '2014',
+      label: NthLabel.Th9,
+      value: NthKey.Th9,
     },
     {
-      label: '第7屆(2014)前',
-      value: 'history',
+      label: NthLabel.Th8,
+      value: NthKey.Th8,
+    },
+    {
+      label: NthLabel.Th7,
+      value: NthKey.Th7,
+    },
+    {
+      label: NthLabel.History,
+      value: NthKey.History,
     },
   ];
   keyword: string = '';
-  year: string = '';
+  th: string = '';
   category: string = '';
 
-  year$: Observable<string> = this.activatedRoute.params.pipe(
-    map((params: Params) => params['year'] ?? '')
+  th$: Observable<string> = this.activatedRoute.params.pipe(
+    map((params: Params) => params['th'] ?? '')
   );
 
   key$: Observable<string> = this.activatedRoute.queryParams.pipe(
@@ -81,18 +78,17 @@ export class SearchComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public ironmanStoreService: IronmanStoreService
   ) {
-    combineLatest([this.year$, this.key$]).subscribe(([year, key]) => {
+    combineLatest([this.th$, this.key$]).subscribe(([year, key]) => {
       this.keyword = key;
-      this.selectYear.setValue(year);
-      this.year = year;
+      this.selectNth.setValue(year);
+      this.th = year;
     });
   }
 
   ngOnInit(): void {}
 
-  onYearChange(year: any) {
-
-    this.router.navigate(['list', year], {
+  onNthChange(th: any) {
+    this.router.navigate(['list', th], {
       queryParams: {
         key: encodeURI(this.keyword),
       },
@@ -102,7 +98,7 @@ export class SearchComponent implements OnInit {
 
   onSearch(value: string): void {
     this.keyword = value;
-    this.router.navigate(['list', this.year], {
+    this.router.navigate(['list', this.th], {
       queryParams: {
         key: encodeURI(value),
       },
@@ -111,7 +107,7 @@ export class SearchComponent implements OnInit {
   }
 
   onClear(): void {
-    this.router.navigate(['list', this.year], {
+    this.router.navigate(['list', this.th], {
       queryParams: {
         key: null,
       },

@@ -1,17 +1,17 @@
 <select
-  *ngIf="isSelectYear"
+  *ngIf="isSelectNth"
   name=""
   id=""
-  [formControl]="selectYear"
-  (ngModelChange)="onYearChange($event)"
-  class="flex bg-transparent m-0 break-words mr-4 w-36 border-none placeholder:text-neutral-400 focus:outline-none"
+  [formControl]="selectNth"
+  (ngModelChange)="onNthChange($event)"
+  class="flex bg-transparent m-0 break-words mr-4 w-40 border-none placeholder:text-neutral-400 focus:outline-none"
   >
   <option
-    *ngFor="let y of years"
-    [value]="y.value"
+    *ngFor="let th of nth"
+    [value]="th.value"
     class="dark:bg-neutral-800 dark:text-white"
   >
-    {{ y.label }}
+    {{ th.label }}
   </option>
 </select>
 <input

@@ -10,11 +10,11 @@ import { IronmanStoreService } from '../ironman-store.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit, OnDestroy {
-  year!: string;
+  th!: string;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
-  year$: Observable<string> = this.activatedRoute.params.pipe(
-    map((params: Params) => params['year'] || ''),
+  th$: Observable<string> = this.activatedRoute.params.pipe(
+    map((params: Params) => params['th'] || ''),
     distinctUntilChanged(),
   );
 
@@ -37,11 +37,11 @@ export class ListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    combineLatest([this.year$, this.category$, this.key$])
+    combineLatest([this.th$, this.category$, this.key$])
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(([year, category, key]) => {
-        this.year = year;
-        this.ironmanStoreService.filterQuery(key, year, category);
+      .subscribe(([th, category, key]) => {
+        this.th = th;
+        this.ironmanStoreService.filterQuery(key, th, category);
       });
   }
 
@@ -51,7 +51,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   removeCate() {
-    this.router.navigate(['list', this.year], {
+    this.router.navigate(['list', this.th], {
       queryParams: {
         category: null,
       },

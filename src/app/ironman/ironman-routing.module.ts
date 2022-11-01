@@ -14,7 +14,7 @@ const routes: Routes = [
     component: ListComponent,
   },
   {
-    path: 'list/:year',
+    path: 'list/:th',
     component: ListComponent,
   },
 ];
