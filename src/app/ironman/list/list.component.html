@@ -13,51 +13,77 @@
     </div>
   </div>
   <div>
-    <ng-container *ngIf="ironmanStoreService.getIronmanList$ | async as list">
-      <p class="text-right">共 {{ list.length }} 筆</p>
-      <ul *ngFor="let item of list">
-        <li class="leading-loose mb-2 align-top">
-          <div class="block md:inline-block">
-            <span class="inline-block align-top">
-              第{{ item.nth }}屆 ({{ item.year }})</span
-            >
-            <ng-container *ngIf="+item.nth >= 7; else history">
-              <a
-                [routerLink]="['../', item.nth + 'th']"
-                [queryParams]="{
-                  category: item.category,
-                  key: key$ | async
-                }"
-                class="relative top-1 align-top mx-2 w-24 rounded bg-neutral-200 text-center text-xs leading-loose dark:bg-neutral-700 hover:bg-opacity-70 dark:hover:bg-opacity-70"
-                >{{ item.category }}</a
+    <ng-container *ngIf="!(ironmanStoreService.isLoading$ | async); else empty">
+      <ng-container *ngIf="ironmanStoreService.getIronmanList$ | async as list">
+        <p class="text-right">共 {{ list.length }} 筆</p>
+        <ul *ngFor="let item of list">
+          <li class="leading-loose mb-2 align-top">
+            <div class="block md:inline-block">
+              <span class="inline-block align-top">
+                第{{ item.nth }}屆 ({{ item.year }})</span
               >
-            </ng-container>
-            <ng-template #history>
+              <ng-container *ngIf="+item.nth >= 7; else history">
+                <a
+                  [routerLink]="['../', item.nth + 'th']"
+                  [queryParams]="{
+                    category: item.category,
+                    key: key$ | async
+                  }"
+                  class="relative top-1 align-top mx-2 w-24 rounded bg-neutral-200 text-center text-xs leading-loose dark:bg-neutral-700 hover:bg-opacity-70 dark:hover:bg-opacity-70"
+                  >{{ item.category }}</a
+                >
+              </ng-container>
+              <ng-template #history>
+                <a
+                  [routerLink]="['../history']"
+                  [queryParams]="{
+                    category: item.category,
+                    key: key$ | async
+                  }"
+                  class="relative top-1 align-top mx-2 w-24 rounded bg-neutral-200 text-center text-xs leading-loose dark:bg-neutral-700 hover:bg-opacity-70 dark:hover:bg-opacity-70"
+                  >{{ item.category }}</a
+                >
+              </ng-template>
+            </div>
+            <div class="block md:inline-block">
               <a
-                [routerLink]="['../history']"
-                [queryParams]="{
-                  category: item.category,
-                  key: key$ | async
-                }"
-                class="relative top-1 align-top mx-2 w-24 rounded bg-neutral-200 text-center text-xs leading-loose dark:bg-neutral-700 hover:bg-opacity-70 dark:hover:bg-opacity-70"
-                >{{ item.category }}</a
+                class="inline-block align-top hover:text-blue-500 mr-2"
+                [href]="item.topicUrl"
+                target="_blank"
               >
-            </ng-template>
-          </div>
-          <div class="block md:inline-block">
-            <a
-              class="inline-block align-top hover:text-blue-500 mr-2"
-              [href]="item.topicUrl"
-              target="_blank"
-            >
-              {{ item.topic }}
-            </a>
-            <span class="inline-block align-top text-neutral-400">{{
-              item.author
-            }}</span>
-          </div>
-        </li>
-      </ul>
+                {{ item.topic }}
+              </a>
+              <span class="inline-block align-top text-neutral-400">{{
+                item.author
+              }}</span>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
     </ng-container>
   </div>
 </div>
+<ng-template #empty>
+  <!-- <div class="w-full h-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"> -->
+  <div class="p-40 w-20 m-auto">
+    <div class="relative">
+      <div class="w-20 h-20 border-neutral-200 border-2 rounded-full"></div>
+      <div
+        class="w-20 h-20 border-neutral-700 border-t-2 animate-spin rounded-full absolute left-0 top-0"
+      ></div>
+    </div>
+    <div class="relative">
+      <div class="w-10 h-10 border-neutral-200 border-2 rounded-full"></div>
+      <div
+        class="w-10 h-10 border-neutral-700 border-t-2 animate-spin rounded-full absolute left-0 top-0"
+      ></div>
+    </div>
+
+    <div class="relative">
+      <div class="w-5 h-5 border-neutral-200 border-2 rounded-full"></div>
+      <div
+        class="w-5 h-5 border-neutral-700 border-t-2 animate-spin rounded-full absolute left-0 top-0"
+      ></div>
+    </div>
+  </div>
+</ng-template>

@@ -8,6 +8,7 @@ import {
   of,
   shareReplay,
   switchMap,
+  tap,
 } from 'rxjs';
 import { IronmanListInfo, NthKey } from './ironman.model';
 import { IronmanService } from './ironman.service';
@@ -16,6 +17,8 @@ import { IronmanService } from './ironman.service';
   providedIn: 'root',
 })
 export class IronmanStoreService {
+  public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+
   public ironman14th$: Observable<IronmanListInfo[]> = this.ironmanService
     .fetch14thIronman()
     .pipe(shareReplay(1));
@@ -49,7 +52,7 @@ export class IronmanStoreService {
 
   constructor(private ironmanService: IronmanService) {}
 
-  filterNthObservable(year: string = '') {
+  filterNthObservable(th: string = '') {
     return combineLatest([
       this.ironman14th$,
       this.ironman13th$,
@@ -61,9 +64,10 @@ export class IronmanStoreService {
       this.ironman7th$,
       this.ironmanHistory$,
     ]).pipe(
+      tap(() => this.isLoading$.next(true)),
       map(([th14, th13, th12, th11, th10, th9, th8, th7, history]) => {
         let list: IronmanListInfo[] = [];
-        switch (year) {
+        switch (th) {
           case NthKey.Th14:
             list = th14;
             break;
@@ -112,6 +116,7 @@ export class IronmanStoreService {
 
   filterCategory(th: string = '', category: string = '') {
     return this.filterNthObservable(th).pipe(
+      tap(() => this.isLoading$.next(true)),
       map((list) => {
         return list.filter((d: IronmanListInfo) => {
           return d.category
@@ -140,6 +145,7 @@ export class IronmanStoreService {
       )
       .subscribe((res) => {
         this.getIronmanList$.next(res);
+        this.isLoading$.next(false);
       });
   }
 }
