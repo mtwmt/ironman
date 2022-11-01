@@ -5,7 +5,7 @@
   [formControl]="selectNth"
   (ngModelChange)="onNthChange($event)"
   class="flex bg-transparent m-0 break-words mr-4 w-40 border-none placeholder:text-neutral-400 focus:outline-none"
-  >
+>
   <option
     *ngFor="let th of nth"
     [value]="th.value"
@@ -21,15 +21,24 @@
   (keyup.enter)="onSearch($any($event).target.value)"
   class="flex bg-transparent m-0 break-words mr-4 w-full border-none placeholder:text-neutral-400 focus:outline-none"
 />
-<fa-icon
-  [icon]="['fas', 'xmark']"
-  class="cursor-pointer flex items-center text-neutral-300"
-  (click)="onClear()"
->
-</fa-icon>
-<fa-icon
-  [icon]="['fas', 'magnifying-glass']"
-  class="ml-2 cursor-pointer flex items-center text-neutral-300"
-  (click)="onSearch(keyword)"
->
-</fa-icon>
+<div class="flex">
+  <span
+    *ngIf="keyword.length > 0"
+    class="h-10 w-10 cursor-pointer flex items-center justify-center"
+  >
+    <fa-icon
+      [icon]="['fas', 'xmark']"
+      class="cursor-pointer flex items-center text-neutral-300"
+      (click)="onClear()"
+    >
+    </fa-icon>
+  </span>
+  <span class="h-10 w-10 cursor-pointer flex items-center justify-center">
+    <fa-icon
+      [icon]="['fas', 'magnifying-glass']"
+      class="text-neutral-300"
+      (click)="onSearch(keyword)"
+    >
+    </fa-icon>
+  </span>
+</div>
