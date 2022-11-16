@@ -24,7 +24,7 @@
               >
               <ng-container *ngIf="+item.nth >= 7; else history">
                 <a
-                  [routerLink]="['../', item.nth + 'th']"
+                  routerLink=""
                   [queryParams]="{
                     category: item.category,
                     key: key$ | async

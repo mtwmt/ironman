@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable, combineLatest, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, combineLatest, Subject } from 'rxjs';
 import { map, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { IronmanStoreService } from '../ironman-store.service';
 
@@ -15,7 +15,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
   th$: Observable<string> = this.activatedRoute.params.pipe(
     map((params: Params) => params['th'] || ''),
-    distinctUntilChanged(),
+    distinctUntilChanged()
   );
 
   key$: Observable<string> = this.activatedRoute.queryParams.pipe(
@@ -24,9 +24,7 @@ export class ListComponent implements OnInit, OnDestroy {
   );
 
   category$: Observable<string> = this.activatedRoute.queryParams.pipe(
-    map((params: Params) =>
-      !!params['category'] ? params['category'] : ''
-    ),
+    map((params: Params) => (!!params['category'] ? params['category'] : '')),
     distinctUntilChanged()
   );
 
