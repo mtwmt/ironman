@@ -19,6 +19,9 @@ import { IronmanService } from './ironman.service';
 export class IronmanStoreService {
   public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
+  public ironman15th$: Observable<IronmanListInfo[]> = this.ironmanService
+    .fetch15thIronman()
+    .pipe(shareReplay(1));
   public ironman14th$: Observable<IronmanListInfo[]> = this.ironmanService
     .fetch14thIronman()
     .pipe(shareReplay(1));
@@ -54,6 +57,7 @@ export class IronmanStoreService {
 
   filterNthObservable(th: string = '') {
     return combineLatest([
+      this.ironman15th$,
       this.ironman14th$,
       this.ironman13th$,
       this.ironman12th$,
@@ -65,9 +69,12 @@ export class IronmanStoreService {
       this.ironmanHistory$,
     ]).pipe(
       tap(() => this.isLoading$.next(true)),
-      map(([th14, th13, th12, th11, th10, th9, th8, th7, history]) => {
+      map(([th15, th14, th13, th12, th11, th10, th9, th8, th7, history]) => {
         let list: IronmanListInfo[] = [];
         switch (th) {
+          case NthKey.Th15:
+            list = th15;
+            break;
           case NthKey.Th14:
             list = th14;
             break;
@@ -97,6 +104,7 @@ export class IronmanStoreService {
             break;
           default:
             list = [
+              ...th15,
               ...th14,
               ...th13,
               ...th12,

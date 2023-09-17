@@ -25,6 +25,10 @@ export class SearchComponent implements OnInit {
       value: NthKey.All,
     },
     {
+      label: NthLabel.Th15,
+      value: NthKey.Th15,
+    },
+    {
       label: NthLabel.Th14,
       value: NthKey.Th14,
     },

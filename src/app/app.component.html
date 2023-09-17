@@ -1,5 +1,5 @@
 <div class="relative mx-auto h-full w-full container">
-  <div class="relative  h-full md:flex md:flex-col">
+  <div class="relative h-full md:flex md:flex-col">
     <header class="min-h-[60px] w-full">
       <nav class="flex justify-between items-center">
         <ul class="flex text-sm p-4 text-neutral-700 dark:text-neutral-200">
@@ -8,8 +8,8 @@
         </ul>
         <ul class="flex items-center">
           <li
-          (click)="onThemeChange('dark')"
-          class="cursor-pointer inline-block dark:hidden"
+            (click)="onThemeChange('dark')"
+            class="cursor-pointer inline-block dark:hidden"
           >
             <svg
               viewBox="0 0 24 24"
@@ -30,8 +30,8 @@
             </svg>
           </li>
           <li
-          (click)="onThemeChange('')"
-          class="cursor-pointer hidden dark:inline-block"
+            (click)="onThemeChange('')"
+            class="cursor-pointer hidden dark:inline-block"
           >
             <svg viewBox="0 0 24 24" fill="none" class="w-6 h-6">
               <path
@@ -66,13 +66,16 @@
         </ul>
       </nav>
     </header>
-    <router-outlet></router-outlet>
+    <div class="flex-grow">
+      <router-outlet></router-outlet>
+    </div>
     <footer class="relative bg-white dark:bg-neutral-800 dark:text-white">
       <div>
         <p class="p-4 text-right text-xs">
-          Copyright © 2022
-          <a href="https://mtwmt.com/" target="_blank" class="mx-1 underline">Mandy</a>. All rights
-          reserved. Build with Angular
+          Copyright © 2022-{{ year }}
+          <a href="https://mtwmt.com/" target="_blank" class="mx-1 underline"
+            >Mandy</a
+          >. All rights reserved. Build with Angular
         </p>
       </div>
     </footer>

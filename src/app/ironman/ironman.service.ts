@@ -48,4 +48,8 @@ export class IronmanService {
     const url = `${this.baseUrl}/ironman14th.json`;
     return this.httpClient.get<IronmanListInfo[]>(url);
   }
+  fetch15thIronman() {
+    const url = `${this.baseUrl}/ironman15th.json`;
+    return this.httpClient.get<IronmanListInfo[]>(url);
+  }
 }

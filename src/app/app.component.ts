@@ -8,6 +8,9 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+
+  year = new Date().getFullYear()
+
   constructor(
     private renderer: Renderer2,
     public appService: AppService,
