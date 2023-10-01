@@ -4,12 +4,11 @@
   id=""
   [formControl]="selectNth"
   (ngModelChange)="onNthChange($event)"
-  class="flex bg-transparent m-0 break-words mr-4 w-40 border-none placeholder:text-neutral-400 focus:outline-none"
+  class="flex bg-transparent m-0 break-words mr-4 w-40 border-none placeholder:text-neutral-400 focus:outline-none dark:text-black"
 >
   <option
     *ngFor="let th of nth"
     [value]="th.value"
-    class="dark:bg-neutral-800 dark:text-white"
   >
     {{ th.label }}
   </option>
@@ -19,7 +18,7 @@
   placeholder="搜尋文章標題"
   [(ngModel)]="keyword"
   (keyup.enter)="onSearch($any($event).target.value)"
-  class="flex bg-transparent m-0 break-words mr-4 w-full border-none placeholder:text-neutral-400 focus:outline-none"
+  class="flex bg-transparent m-0 break-words mr-4 w-full border-none placeholder:text-neutral-400 focus:outline-none dark:text-black"
 />
 <div class="flex">
   <span

@@ -13,26 +13,33 @@ export class ListComponent implements OnInit, OnDestroy {
   th!: string;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
-  th$: Observable<string> = this.activatedRoute.params.pipe(
-    map((params: Params) => params['th'] || ''),
-    distinctUntilChanged()
-  );
+  th$: Observable<string>;
+  key$: Observable<string>;
 
-  key$: Observable<string> = this.activatedRoute.queryParams.pipe(
-    map((params: Params) => (!!params['key'] ? decodeURI(params['key']) : '')),
-    distinctUntilChanged()
-  );
-
-  category$: Observable<string> = this.activatedRoute.queryParams.pipe(
-    map((params: Params) => (!!params['category'] ? params['category'] : '')),
-    distinctUntilChanged()
-  );
+  category$: Observable<string>;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public ironmanStoreService: IronmanStoreService
-  ) {}
+  ) {
+    this.th$ = this.activatedRoute.params.pipe(
+      map((params: Params) => params['th'] || ''),
+      distinctUntilChanged()
+    );
+
+    this.key$ = this.activatedRoute.queryParams.pipe(
+      map((params: Params) =>
+        !!params['key'] ? decodeURI(params['key']) : ''
+      ),
+      distinctUntilChanged()
+    );
+
+    this.category$ = this.activatedRoute.queryParams.pipe(
+      map((params: Params) => (!!params['category'] ? params['category'] : '')),
+      distinctUntilChanged()
+    );
+  }
 
   ngOnInit(): void {
     combineLatest([this.th$, this.category$, this.key$])

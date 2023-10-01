@@ -69,19 +69,23 @@ export class SearchComponent implements OnInit {
   th: string = '';
   category: string = '';
 
-  th$: Observable<string> = this.activatedRoute.params.pipe(
-    map((params: Params) => params['th'] ?? '')
-  );
+  th$: Observable<string>;
 
-  key$: Observable<string> = this.activatedRoute.queryParams.pipe(
-    map((params: Params) => (!!params['key'] ? decodeURI(params['key']) : ''))
-  );
+  key$: Observable<string>;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public ironmanStoreService: IronmanStoreService
   ) {
+    this.th$ = this.activatedRoute.params.pipe(
+      map((params: Params) => params['th'] ?? '')
+    );
+
+    this.key$ = this.activatedRoute.queryParams.pipe(
+    map((params: Params) => (!!params['key'] ? decodeURI(params['key']) : ''))
+  );
+
     combineLatest([this.th$, this.key$]).subscribe(([year, key]) => {
       this.keyword = key;
       this.selectNth.setValue(year);

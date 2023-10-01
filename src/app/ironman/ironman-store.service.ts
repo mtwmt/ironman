@@ -19,41 +19,52 @@ import { IronmanService } from './ironman.service';
 export class IronmanStoreService {
   public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
-  public ironman15th$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetch15thIronman()
-    .pipe(shareReplay(1));
-  public ironman14th$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetch14thIronman()
-    .pipe(shareReplay(1));
-  public ironman13th$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetch13thIronman()
-    .pipe(shareReplay(1));
-  public ironman12th$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetch12thIronman()
-    .pipe(shareReplay(1));
-  public ironman11th$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetch11thIronman()
-    .pipe(shareReplay(1));
-  public ironman10th$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetch10thIronman()
-    .pipe(shareReplay(1));
-  public ironman9th$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetch9thIronman()
-    .pipe(shareReplay(1));
-  public ironman8th$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetch8thIronman()
-    .pipe(shareReplay(1));
-  public ironman7th$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetch7thIronman()
-    .pipe(shareReplay(1));
-  public ironmanHistory$: Observable<IronmanListInfo[]> = this.ironmanService
-    .fetchHistoryIronman()
-    .pipe(shareReplay(1));
+  public ironman15th$: Observable<IronmanListInfo[]>;
+  public ironman14th$: Observable<IronmanListInfo[]>;
+  public ironman13th$: Observable<IronmanListInfo[]>;
+  public ironman12th$: Observable<IronmanListInfo[]>;
+  public ironman11th$: Observable<IronmanListInfo[]>;
+  public ironman10th$: Observable<IronmanListInfo[]>;
+  public ironman9th$: Observable<IronmanListInfo[]>;
+  public ironman8th$: Observable<IronmanListInfo[]>;
+  public ironman7th$: Observable<IronmanListInfo[]>;
+  public ironmanHistory$: Observable<IronmanListInfo[]>;
 
   public getIronmanList$: BehaviorSubject<IronmanListInfo[]> =
     new BehaviorSubject([] as IronmanListInfo[]);
 
-  constructor(private ironmanService: IronmanService) {}
+  constructor(private ironmanService: IronmanService) {
+    this.ironman15th$ = this.ironmanService
+      .fetch15thIronman()
+      .pipe(shareReplay(1));
+    this.ironman14th$ = this.ironmanService
+      .fetch14thIronman()
+      .pipe(shareReplay(1));
+    this.ironman13th$ = this.ironmanService
+      .fetch13thIronman()
+      .pipe(shareReplay(1));
+    this.ironman12th$ = this.ironmanService
+      .fetch12thIronman()
+      .pipe(shareReplay(1));
+    this.ironman11th$ = this.ironmanService
+      .fetch11thIronman()
+      .pipe(shareReplay(1));
+    this.ironman10th$ = this.ironmanService
+      .fetch10thIronman()
+      .pipe(shareReplay(1));
+    this.ironman9th$ = this.ironmanService
+      .fetch9thIronman()
+      .pipe(shareReplay(1));
+    this.ironman8th$ = this.ironmanService
+      .fetch8thIronman()
+      .pipe(shareReplay(1));
+    this.ironman7th$ = this.ironmanService
+      .fetch7thIronman()
+      .pipe(shareReplay(1));
+    this.ironmanHistory$ = this.ironmanService
+      .fetchHistoryIronman()
+      .pipe(shareReplay(1));
+  }
 
   filterNthObservable(th: string = '') {
     return combineLatest([
