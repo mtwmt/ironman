@@ -10,7 +10,7 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
-import { IronmanListInfo } from './ironman.model';
+import { IronmanListInfo, NthKey } from './ironman.model';
 import { IronmanService } from './ironman.service';
 
 @Injectable({
@@ -26,23 +26,26 @@ export class IronmanStoreService {
     new BehaviorSubject([] as IronmanListInfo[]);
 
   private ironmanTh = [
-    '15th',
-    '14th',
-    '13th',
-    '12th',
-    '11th',
-    '10th',
-    '9th',
-    '8th',
-    '7th',
-    '',
+    NthKey.All,
+    NthKey.Th15,
+    NthKey.Th14,
+    NthKey.Th13,
+    NthKey.Th12,
+    NthKey.Th11,
+    NthKey.Th10,
+    NthKey.Th9,
+    NthKey.Th8,
+    NthKey.Th7,
+    NthKey.History,
   ];
 
   constructor(private ironmanService: IronmanService) {
     this.ironmanTh.forEach((th) => {
-      this.ironmanObservables[th] = this.ironmanService
-        .fetchIronman(th)
-        .pipe(shareReplay(1));
+      if (th !== NthKey.All) {
+        this.ironmanObservables[th] = this.ironmanService
+          .fetchIronman(th)
+          .pipe(shareReplay(1));
+      }
     });
   }
 
