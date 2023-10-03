@@ -1,17 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, combineLatest, Subject } from 'rxjs';
 import { map, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { IronmanStoreService } from '../ironman-store.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class ListComponent implements OnInit {
+  destroyRef = inject(DestroyRef);
+
   th!: string;
-  private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   th$: Observable<string>;
   key$: Observable<string>;
@@ -43,17 +45,14 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     combineLatest([this.th$, this.category$, this.key$])
-      .pipe(takeUntil(this.onDestroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(([th, category, key]) => {
         this.th = th;
         this.ironmanStoreService.filterQuery(key, th, category);
       });
   }
 
-  ngOnDestroy(): void {
-    this.onDestroy$.next(false);
-    this.onDestroy$.complete();
-  }
+
 
   removeCate() {
     this.router.navigate(['list', this.th], {

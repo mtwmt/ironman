@@ -10,10 +10,16 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { SearchComponent } from './search/search.component';
+import { CommentsComponent } from '../comments/comments.component';
 
 
 @NgModule({
-  declarations: [IronmanComponent, ListComponent, SearchComponent],
+  declarations: [
+    IronmanComponent,
+    ListComponent,
+    SearchComponent,
+    CommentsComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
