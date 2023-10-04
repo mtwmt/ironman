@@ -73,7 +73,7 @@ export class IronmanStoreService {
         return list.filter((d: IronmanListInfo) => {
           return d.category
             .toLocaleLowerCase()
-            .includes(category.toLocaleLowerCase());
+            .includes(decodeURI(category.toLocaleLowerCase()));
         });
       })
     );
@@ -89,7 +89,7 @@ export class IronmanStoreService {
               return list.filter((d: IronmanListInfo) => {
                 return d.topic
                   .toLocaleLowerCase()
-                  .includes(val.toLocaleLowerCase());
+                  .includes(decodeURI(val.toLocaleLowerCase()));
               });
             })
           );
@@ -105,10 +105,13 @@ export class IronmanStoreService {
     return this.filterNthObservable('').pipe(
       tap(() => this.isLoading$.next(true)),
       map((list: any) => {
+
+        console.log('author', decodeURI(author.toLocaleLowerCase()))
+
         return list.filter((d: IronmanListInfo) => {
           return d.author
             .toLocaleLowerCase()
-            .includes(author.toLocaleLowerCase());
+            .includes(decodeURI(author.toLocaleLowerCase()));
         });
       })
     ).subscribe(res => {
