@@ -1,6 +1,33 @@
 <div class="">
   IT 鐵人賽歷屆主題搜尋
   <app-search></app-search>
+
+  <a class="inline-block mt-4 mr-8"
+    [routerLink]="[]"
+    [queryParams]="{}"
+    >
+    <fa-icon
+      class="mr-1"
+      [ngClass]="!(isAuthorSearch$ | async) ? 'text-cyan-700' : ''"
+      [icon]="['fas', 'diagram-project']"
+      size="1x"
+    />主題
+  </a>
+  <a class="inline-block mt-4 mr-8"
+  [routerLink]="['','list']"
+  [queryParams]="{
+    author: ''
+  }"
+  >
+    <fa-icon
+    class="mr-1"
+    [ngClass]="(isAuthorSearch$ | async) ? 'text-cyan-700' : ''"
+    [icon]="['fas', 'user']" size="1x" />
+    作者
+  </a>
+
+  <hr class="mb-4" />
+
   <div *ngIf="!!(category$ | async)" class="mt-8">
     主題：
     <div
@@ -8,10 +35,11 @@
     >
       <span class="inline-block mr-2">{{ category$ | async }}</span>
       <span (click)="removeCate()" class="cursor-pointer">
-        <fa-icon [icon]="['fas', 'xmark']" size="1x"> </fa-icon>
+        <fa-icon [icon]="['fas', 'xmark']" size="1x" />
       </span>
     </div>
   </div>
+
   <div>
     <ng-container *ngIf="!(ironmanStoreService.isLoading$ | async); else empty">
       <ng-container *ngIf="ironmanStoreService.getIronmanList$ | async as list">
@@ -53,9 +81,14 @@
               >
                 {{ item.topic }}
               </a>
-              <span class="inline-block align-top text-neutral-400">{{
-                item.author
-              }}</span>
+              <a
+                [routerLink]="[]"
+                [queryParams]="{
+                    author: item.author,
+                  }"
+                class="inline-block align-top text-neutral-400"
+                >{{ item.author }}</a
+              >
             </div>
           </li>
         </ul>

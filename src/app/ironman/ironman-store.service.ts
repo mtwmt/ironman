@@ -58,7 +58,6 @@ export class IronmanStoreService {
         if (th in this.ironmanObservables) {
           const keys = Object.keys(this.ironmanObservables);
           const idx = keys.indexOf(th);
-
           return list[idx];
         } else {
           return list.reduce((acc, list) => acc.concat(list), []);
@@ -100,5 +99,21 @@ export class IronmanStoreService {
         this.getIronmanList$.next(res);
         this.isLoading$.next(false);
       });
+  }
+
+  filterAuthor(author: string) {
+    return this.filterNthObservable('').pipe(
+      tap(() => this.isLoading$.next(true)),
+      map((list: any) => {
+        return list.filter((d: IronmanListInfo) => {
+          return d.author
+            .toLocaleLowerCase()
+            .includes(author.toLocaleLowerCase());
+        });
+      })
+    ).subscribe(res => {
+      this.getIronmanList$.next(res);
+      this.isLoading$.next(false);
+    })
   }
 }

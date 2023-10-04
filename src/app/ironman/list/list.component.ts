@@ -1,7 +1,7 @@
-import { Component, DestroyRef, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable, combineLatest, Subject } from 'rxjs';
-import { map, takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { Observable, combineLatest } from 'rxjs';
+import { map, distinctUntilChanged } from 'rxjs/operators';
 import { IronmanStoreService } from '../ironman-store.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -17,8 +17,10 @@ export class ListComponent implements OnInit {
 
   th$: Observable<string>;
   key$: Observable<string>;
-
   category$: Observable<string>;
+  author$: Observable<string>;
+
+  isAuthorSearch$: Observable<boolean>;
 
   constructor(
     private router: Router,
@@ -41,6 +43,23 @@ export class ListComponent implements OnInit {
       map((params: Params) => (!!params['category'] ? params['category'] : '')),
       distinctUntilChanged()
     );
+
+    this.category$ = this.activatedRoute.queryParams.pipe(
+      map((params: Params) => (!!params['category'] ? params['category'] : '')),
+      distinctUntilChanged()
+    );
+
+    this.author$ = this.activatedRoute.queryParams.pipe(
+      takeUntilDestroyed(this.destroyRef),
+      map((params: Params) => (!!params['author'] ? params['author'] : '')),
+      distinctUntilChanged()
+    );
+
+    this.isAuthorSearch$ = this.activatedRoute.queryParams.pipe(
+      map((params: Params) => {
+        return Object.keys(params).includes('author');
+      })
+    );
   }
 
   ngOnInit(): void {
@@ -50,9 +69,14 @@ export class ListComponent implements OnInit {
         this.th = th;
         this.ironmanStoreService.filterQuery(key, th, category);
       });
+
+    this.author$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((author) => {
+        // console.log('sss', res)
+        this.ironmanStoreService.filterAuthor(author);
+      });
   }
-
-
 
   removeCate() {
     this.router.navigate(['list', this.th], {

@@ -68,10 +68,11 @@ export class SearchComponent implements OnInit {
   keyword: string = '';
   th: string = '';
   category: string = '';
-
   th$: Observable<string>;
-
   key$: Observable<string>;
+
+  isAuthorSearch$: Observable<boolean>;
+  author: string = '';
 
   constructor(
     private router: Router,
@@ -83,8 +84,15 @@ export class SearchComponent implements OnInit {
     );
 
     this.key$ = this.activatedRoute.queryParams.pipe(
-    map((params: Params) => (!!params['key'] ? decodeURI(params['key']) : ''))
-  );
+      map((params: Params) => (!!params['key'] ? decodeURI(params['key']) : ''))
+    );
+
+    this.isAuthorSearch$ = this.activatedRoute.queryParams.pipe(
+      map((params: Params) => {
+        return Object.keys(params).includes('author');;
+      })
+    );
+
 
     combineLatest([this.th$, this.key$]).subscribe(([year, key]) => {
       this.keyword = key;
@@ -111,6 +119,16 @@ export class SearchComponent implements OnInit {
         key: encodeURI(value),
       },
       queryParamsHandling: 'merge',
+    });
+  }
+
+  onAuthorSearch(value: string): void {
+    console.log('onAuthorSearch', value);
+
+    this.router.navigate(['list'], {
+      queryParams: {
+        author: encodeURI(value),
+      },
     });
   }
 
