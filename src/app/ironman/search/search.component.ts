@@ -123,8 +123,6 @@ export class SearchComponent implements OnInit {
   }
 
   onAuthorSearch(value: string): void {
-    console.log('onAuthorSearch', value);
-
     this.router.navigate(['list'], {
       queryParams: {
         author: encodeURI(value),

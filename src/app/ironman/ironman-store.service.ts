@@ -106,8 +106,6 @@ export class IronmanStoreService {
       tap(() => this.isLoading$.next(true)),
       map((list: any) => {
 
-        console.log('author', decodeURI(author.toLocaleLowerCase()))
-
         return list.filter((d: IronmanListInfo) => {
           return d.author
             .toLocaleLowerCase()

@@ -1,7 +1,7 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
-import { map, distinctUntilChanged } from 'rxjs/operators';
+import { map, distinctUntilChanged, filter } from 'rxjs/operators';
 import { IronmanStoreService } from '../ironman-store.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -71,9 +71,11 @@ export class ListComponent implements OnInit {
       });
 
     this.author$
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter((author) => !!author)
+      )
       .subscribe((author) => {
-        // console.log('sss', res)
         this.ironmanStoreService.filterAuthor(author);
       });
   }
