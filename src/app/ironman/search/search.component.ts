@@ -25,6 +25,10 @@ export class SearchComponent implements OnInit {
       value: NthKey.All,
     },
     {
+      label: NthLabel.Th16,
+      value: NthKey.Th16,
+    },
+    {
       label: NthLabel.Th15,
       value: NthKey.Th15,
     },
@@ -89,10 +93,9 @@ export class SearchComponent implements OnInit {
 
     this.isAuthorSearch$ = this.activatedRoute.queryParams.pipe(
       map((params: Params) => {
-        return Object.keys(params).includes('author');;
+        return Object.keys(params).includes('author');
       })
     );
-
 
     combineLatest([this.th$, this.key$]).subscribe(([year, key]) => {
       this.keyword = key;

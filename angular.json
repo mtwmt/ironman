@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ironman:build:production"
+              "buildTarget": "ironman:build:production"
             },
             "development": {
-              "browserTarget": "ironman:build:development"
+              "buildTarget": "ironman:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ironman:build"
+            "buildTarget": "ironman:build"
           }
         },
         "test": {

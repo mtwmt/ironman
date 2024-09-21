@@ -1,5 +1,6 @@
 export enum NthLabel {
   All = 'All',
+  Th16 = '第16屆(2024)',
   Th15 = '第15屆(2023)',
   Th14 = '第14屆(2022)',
   Th13 = '第13屆(2021)',
@@ -14,6 +15,7 @@ export enum NthLabel {
 
 export enum NthKey {
   All = '',
+  Th16 = '16th',
   Th15 = '15th',
   Th14 = '14th',
   Th13 = '13th',

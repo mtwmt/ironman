@@ -10,7 +10,9 @@
         <a class="px-3 py-1" [routerLink]="'list'">{{ nthLabel.All }}</a>
       </li>
       <li
-        *ngFor="let num of ['15', '14', '13', '12', '11', '10', '9', '8', '7']"
+        *ngFor="
+          let num of ['16', '15', '14', '13', '12', '11', '10', '9', '8', '7']
+        "
         class="before:pointer-events-none relative inline-block bg-neutral-100 text-neutral-700 mt-3 mx-1 hover:shadow-sm before:hover:border before:absolute before:w-full before:h-full before:top-0 before:left-0 dark:bg-neutral-600 dark:text-white"
       >
         <a

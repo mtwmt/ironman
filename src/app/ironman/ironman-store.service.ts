@@ -27,6 +27,7 @@ export class IronmanStoreService {
 
   private ironmanTh = [
     NthKey.All,
+    NthKey.Th16,
     NthKey.Th15,
     NthKey.Th14,
     NthKey.Th13,
@@ -102,19 +103,20 @@ export class IronmanStoreService {
   }
 
   filterAuthor(author: string) {
-    return this.filterNthObservable('').pipe(
-      tap(() => this.isLoading$.next(true)),
-      map((list: any) => {
-
-        return list.filter((d: IronmanListInfo) => {
-          return d.author
-            .toLocaleLowerCase()
-            .includes(decodeURI(author.toLocaleLowerCase()));
-        });
-      })
-    ).subscribe(res => {
-      this.getIronmanList$.next(res);
-      this.isLoading$.next(false);
-    })
+    return this.filterNthObservable('')
+      .pipe(
+        tap(() => this.isLoading$.next(true)),
+        map((list: any) => {
+          return list.filter((d: IronmanListInfo) => {
+            return d.author
+              .toLocaleLowerCase()
+              .includes(decodeURI(author.toLocaleLowerCase()));
+          });
+        })
+      )
+      .subscribe((res) => {
+        this.getIronmanList$.next(res);
+        this.isLoading$.next(false);
+      });
   }
 }
