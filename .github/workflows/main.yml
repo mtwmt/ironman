@@ -32,12 +32,15 @@ jobs:
         run: npm install
 
       - name: Build the project
-        run: npm run build -- --configuration production # 使用標準 production 目標
+        run: npm run build --prod
 
-      - name: Create .nojekyll file and deploy
+      - name: Create .nojekyll file
+        run: |
+          mkdir -p dist/ironman  # 確保目錄存在
+          touch dist/ironman/.nojekyll  # 創建 .nojekyll 文件
+
+      - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mkdir -p dist/ironman/browser # 確保創建 'browser' 目錄
-          touch dist/ironman/browser/.nojekyll # 創建 .nojekyll 文件
-          npm run ng -- deploy --no-silent --repo=https://github.com/${{ github.repository }}.git
+          npx angular-cli-ghpages --dir=dist/ironman --repo=https://github.com/${{ github.repository }}.git --no-silent
