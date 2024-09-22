@@ -15,15 +15,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true # 保留憑證以便後續步驟使用
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Set Git remote
+        run: git remote add origin https://github.com/${{ github.repository }}.git
+
       - name: Prepare and deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm install
-          npm run ng -- deploy --no-silent
+          npm run ng -- deploy --no-silent --accessToken=${{ secrets.GITHUB_TOKEN }} --repo=https://github.com/${{ github.repository }}.git
