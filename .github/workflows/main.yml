@@ -32,7 +32,7 @@ jobs:
         run: npm install
 
       - name: Build the project
-        run: npm run build --prod
+        run: npm run build -- --base-href="/ironman/"
 
       - name: Create .nojekyll file
         run: |

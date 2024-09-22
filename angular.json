@@ -104,7 +104,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/",
+            "baseHref": "/ironman/",
             "name": "Mandy",
             "email": "mtwmt@hotmail.com"
           }
