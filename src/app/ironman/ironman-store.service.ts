@@ -25,20 +25,7 @@ export class IronmanStoreService {
   public getIronmanList$: BehaviorSubject<IronmanListInfo[]> =
     new BehaviorSubject([] as IronmanListInfo[]);
 
-  private ironmanTh = [
-    NthKey.All,
-    NthKey.Th16,
-    NthKey.Th15,
-    NthKey.Th14,
-    NthKey.Th13,
-    NthKey.Th12,
-    NthKey.Th11,
-    NthKey.Th10,
-    NthKey.Th9,
-    NthKey.Th8,
-    NthKey.Th7,
-    NthKey.History,
-  ];
+  private ironmanTh = Object.entries(NthKey).map(([key, value]) => value);
 
   constructor(private ironmanService: IronmanService) {
     this.ironmanTh.forEach((th) => {

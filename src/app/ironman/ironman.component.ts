@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ironman.component.scss'],
 })
 export class IronmanComponent implements OnInit {
-  nthLabel = NthLabel;
-  nthKey = NthKey;
+  nthOptions = Object.keys(NthKey).map((k: string) => ({
+    label: NthLabel[k as keyof typeof NthLabel],
+    value: NthKey[k as keyof typeof NthKey],
+  }));
 
   constructor() {}
 
