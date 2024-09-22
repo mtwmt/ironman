@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,15 +19,14 @@ import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [AppComponent, AboutComponent],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {

@@ -5,11 +5,9 @@ import { AppService } from './app.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-
-  year = new Date().getFullYear()
+  year = new Date().getFullYear();
 
   constructor(
     private renderer: Renderer2,
