@@ -33,4 +33,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm install
-          npm run ng -- deploy --no-silent --accessToken=${{ secrets.GITHUB_TOKEN }} --repo=https://github.com/${{ github.repository }}.git
+          npm run ng -- deploy --no-silent --repo=https://github.com/${{ github.repository }}.git
