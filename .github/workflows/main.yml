@@ -28,9 +28,16 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build -- --configuration production # 使用標準 production 目標
+
+      - name: Create .nojekyll file
+        run: touch dist/ironman/.nojekyll # 確保創建 .nojekyll 文件
+
       - name: Prepare and deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          npm install
-          npm run ng -- deploy --no-silent --repo=https://github.com/${{ github.repository }}.git
+        run: npm run ng -- deploy --no-silent --repo=https://github.com/${{ github.repository }}.git
