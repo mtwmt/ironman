@@ -34,10 +34,10 @@ jobs:
       - name: Build the project
         run: npm run build -- --configuration production # 使用標準 production 目標
 
-      - name: Create .nojekyll file
-        run: touch dist/ironman/.nojekyll # 確保創建 .nojekyll 文件
-
-      - name: Prepare and deploy
+      - name: Create .nojekyll file and deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run ng -- deploy --no-silent --repo=https://github.com/${{ github.repository }}.git
+        run: |
+          mkdir -p dist/ironman/browser # 確保創建 'browser' 目錄
+          touch dist/ironman/browser/.nojekyll # 創建 .nojekyll 文件
+          npm run ng -- deploy --no-silent --repo=https://github.com/${{ github.repository }}.git
