@@ -28,7 +28,7 @@ export class IsbnComponent implements OnInit {
   ngOnInit(): void {
     this.videoConstraints = {
       advanced: [
-        { focusMode: 'continuous' }, // 連續對焦
+        // { focusMode: 'continuous' }, // 連續對焦
         { focusMode: 'auto' }, // 自動對焦（如果連續對焦無效）
       ],
     };
