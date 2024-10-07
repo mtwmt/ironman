@@ -19,21 +19,15 @@ export class IsbnComponent implements OnInit {
   isbn!: string;
   bookInfo!: any;
   scanResult: string | null = null;
-  videoConstraints: any;
-
-
+  videoConstraints = {
+    facingMode: { exact: 'environment' }, // 使用後置鏡頭，這通常是自動對焦最好的
+    focusMode: 'continuous', // 持續自動對焦
+    zoom: true, // 如果裝置支援的話，可設置為自動縮放
+  };
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.videoConstraints = {
-      advanced: [
-        // { focusMode: 'continuous' }, // 連續對焦
-        { focusMode: 'auto' }, // 自動對焦（如果連續對焦無效）
-      ],
-    };
-
-
     navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
       const track = stream.getVideoTracks()[0];
       const capabilities = track.getCapabilities();
