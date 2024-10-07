@@ -38,6 +38,14 @@ export class IsbnComponent implements OnInit {
     });
   }
 
+  triggerManualFocus() {
+    // 重新啟用相機或觸發新的對焦
+    this.videoConstraints = {
+      ...this.videoConstraints,
+      focusMode: 'manual', // 試圖手動觸發
+    };
+  }
+
   onCamerasFound(devices: MediaDeviceInfo[]): void {
     this.availableDevices = devices;
     this.hasDevices = Boolean(devices && devices.length);

@@ -5,18 +5,19 @@ ISBN:
   [(ngModel)]="isbn"
   (change)="onScanSuccess($any($event.target).value)"
 />
-<zxing-scanner
-  [formats]="formatsEnabled"
-  (camerasFound)="onCamerasFound($event)"
-  (scanSuccess)="onScanSuccess($event)"
-  (permissionResponse)="onHasPermission($event)"
-  [autostart]="true"
-  [device]="selectedDevice"
-  [videoConstraints]="videoConstraints"
->
-  />
-</zxing-scanner>
-
+<div (click)="triggerManualFocus()">
+  <zxing-scanner
+    [formats]="formatsEnabled"
+    (camerasFound)="onCamerasFound($event)"
+    (scanSuccess)="onScanSuccess($event)"
+    (permissionResponse)="onHasPermission($event)"
+    [autostart]="true"
+    [device]="selectedDevice"
+    [videoConstraints]="videoConstraints"
+  >
+    />
+  </zxing-scanner>
+</div>
 <div *ngIf="isbn">
   <p>掃描到的 ISBN: {{ isbn }}</p>
 </div>
