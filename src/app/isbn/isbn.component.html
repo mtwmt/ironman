@@ -10,7 +10,9 @@ ISBN:
   (camerasFound)="onCamerasFound($event)"
   (scanSuccess)="onScanSuccess($event)"
   (permissionResponse)="onHasPermission($event)"
+  [autostart]="true"
   [device]="selectedDevice"
+  [videoConstraints]="mediaConstraints"
 >
   />
 </zxing-scanner>
