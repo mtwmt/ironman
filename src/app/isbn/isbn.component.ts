@@ -20,6 +20,8 @@ export class IsbnComponent implements OnInit {
   bookInfo!: any;
   scanResult: string | null = null;
   videoConstraints = {
+    width: { ideal: 1280 }, // 嘗試將解析度設置為 1280x720
+    height: { ideal: 720 },
     facingMode: { exact: 'environment' }, // 使用後置鏡頭，這通常是自動對焦最好的
     focusMode: 'continuous', // 持續自動對焦
     zoom: true, // 如果裝置支援的話，可設置為自動縮放
