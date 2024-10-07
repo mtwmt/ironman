@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { IronmanComponent } from './ironman/ironman.component';
+import { IsbnComponent } from './isbn/isbn.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+  },
+  {
+    path: 'isbn',
+    component: IsbnComponent,
   },
   {
     path: '**',

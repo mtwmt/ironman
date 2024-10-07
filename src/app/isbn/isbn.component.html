@@ -1,0 +1,31 @@
+<p>isbn works!</p>
+ISBN:
+<input
+  type="text"
+  [(ngModel)]="isbn"
+  (change)="onScanSuccess($any($event.target).value)"
+/>
+<zxing-scanner
+  [formats]="formatsEnabled"
+  (camerasFound)="onCamerasFound($event)"
+  (scanSuccess)="onScanSuccess($event)"
+  (permissionResponse)="onHasPermission($event)"
+  [device]="selectedDevice"
+>
+  />
+</zxing-scanner>
+
+<div *ngIf="isbn">
+  <p>掃描到的 ISBN: {{ isbn }}</p>
+</div>
+
+<div *ngIf="bookInfo">
+  <h3>{{ bookInfo.title }}</h3>
+  <p>作者: {{ bookInfo.authors.join(", ") }}</p>
+  <p>出版日期: {{ bookInfo.publishedDate }}</p>
+  <img
+    *ngIf="bookInfo.imageLinks?.thumbnail"
+    [src]="bookInfo.imageLinks.thumbnail"
+    alt="{{ bookInfo.title }}"
+  />
+</div>

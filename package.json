@@ -23,6 +23,9 @@
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@zxing/browser": "^0.1.5",
+    "@zxing/library": "^0.21.3",
+    "@zxing/ngx-scanner": "^18.0.1",
     "rxjs": "~7.8.1",
     "tslib": "^2.7.0",
     "zone.js": "~0.14.2"
