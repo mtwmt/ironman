@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, map, tap, combineLatest } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IronmanStoreService } from '../ironman-store.service';
 import { NthKey, NthLabel } from '../ironman.model';
 
@@ -11,6 +14,7 @@ interface option {
 }
 @Component({
   selector: 'app-search',
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, FontAwesomeModule],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })

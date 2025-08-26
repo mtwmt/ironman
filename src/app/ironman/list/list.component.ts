@@ -2,11 +2,17 @@ import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
 import { map, distinctUntilChanged, filter } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IronmanStoreService } from '../ironman-store.service';
+import { SearchComponent } from '../search/search.component';
+import { CommentsComponent } from '../../comments/comments.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list',
+  imports: [CommonModule, RouterModule, FontAwesomeModule, SearchComponent],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })

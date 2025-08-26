@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, CommonModule } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -12,6 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-comments',
+  imports: [CommonModule],
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.scss'],
 })
